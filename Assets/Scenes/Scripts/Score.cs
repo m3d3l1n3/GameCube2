@@ -9,6 +9,7 @@ using Random = UnityEngine.Random; //alias
 
 public class Score : MonoBehaviour
 {
+    #region Declarations
     public Rigidbody Ball;
     public GameObject Cube;
     public int Points1;
@@ -20,10 +21,11 @@ public class Score : MonoBehaviour
     public Text Timer;
     float timer = 1000f;
     public Timer Tseconds;
-    float timeScaling = 1.5f;
+    float CountDownSpeed = 1.5f;
     public GameObject supplyPrefab;
     private static bool spawnSupply = false;
     int supplyNumber = 0;
+    #endregion
     // Start is called before the first frame update
     void Start()
     {
@@ -74,17 +76,16 @@ public class Score : MonoBehaviour
         Cube.SetActive(false);
     }
     
-    //public float timer2=0f;
     // Update is called once per frame
     void Update()
     {
         #region Moving the timer && spawning supplies
-        bool timerdone;
-        if(Time.realtimeSinceStartup/timeScaling<=4.5)
-            CountDown(-Time.realtimeSinceStartup / timeScaling + 4);
-        if (timer > 3) timerdone = false;
-        else timerdone = true;
-        switch (timerdone && !string.IsNullOrEmpty(GoalScored.text))
+        bool DoWENeedCountDown;
+        if(Time.realtimeSinceStartup/CountDownSpeed<=4.5)
+            CountDown(-Time.realtimeSinceStartup / CountDownSpeed + 4);
+        if (timer > 3) DoWENeedCountDown = false;
+        else DoWENeedCountDown = true;
+        switch (DoWENeedCountDown && !string.IsNullOrEmpty(GoalScored.text))
         {
             case false:
                 CountDown(timer);

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Abilities : MonoBehaviour
 {
+    #region Declarations
     public Rigidbody cube;
     public System.Diagnostics.Stopwatch coolDown1;
     public System.Diagnostics.Stopwatch abilityDuration1;
@@ -12,6 +13,7 @@ public class Abilities : MonoBehaviour
     float acceleration = 25f;
     long coolDownPeriod = 60000;
     float MassSpeedProportion = 2f;
+    #endregion 
     // Start is called before the first frame update
     void Start()
     {

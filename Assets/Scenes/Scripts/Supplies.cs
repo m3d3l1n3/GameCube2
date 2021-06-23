@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Supplies : MonoBehaviour
 {
+    #region Declarations
     public Rigidbody Ball;
     public Text Storage;
     public Timer supplyTime;
@@ -15,6 +16,7 @@ public class Supplies : MonoBehaviour
     public System.Diagnostics.Stopwatch StopSuppply;
     int MaxSupplies = 3;
     int NumberSupplyInUse = 0;
+    #endregion
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +32,7 @@ public class Supplies : MonoBehaviour
         if (collision.gameObject.name == "Ball")
         {
             Debug.Log("Collision");
-            Ball.AddForce(0f, 100f, 0f);
+            Ball.AddForce(0f, 50f, 0f);
         }
         if (collision.gameObject.tag == "Supply")
         {

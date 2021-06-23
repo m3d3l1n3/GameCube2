@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class movement : MonoBehaviour
 {
+    #region Declarations
     public Rigidbody cube;
     public Camera camera;
     public Transform target;
@@ -14,6 +15,7 @@ public class movement : MonoBehaviour
     public Vector3 offset;
     public float cameraSpeed = 0.75f;
     public bool HasCollided;
+    #endregion
     // Start is called before the first frame update
     void Start()
     {
@@ -26,15 +28,6 @@ public class movement : MonoBehaviour
         NumberJumps = 0;
     }
 
-    //private void OnCollision(Collision collision)
-    //{
-    //    if(collision.gameObject.CompareTag("cube"))
-
-    //    //HasCollided = true;
-    //    //var currentRotation = cube.rotation.y;
-    //    ////RigidbodyConstraints.FreezeRotationY;
-    //    //currentRotation = 0.0f;
-    //}
     void FixedUpdate()
     {
         if (NumberJumps > 1)
@@ -50,23 +43,15 @@ public class movement : MonoBehaviour
                 NumberJumps += 1;
             }
         }
-        //PlayerMovement();
         PlayerMovementV2();
-        //if (HasCollided == true)
-        //{
-        //    var currentRotation = cube.position.y;
-        //    currentRotation = 0.0f;
-        //}
-
         #region CameraMovement
         Vector3 DesieredPosition = target.position + offset;
         Vector3 SmoothPosition = Vector3.Lerp(camera.transform.position, DesieredPosition, (cameraSpeed * Time.deltaTime));
         camera.transform.position = SmoothPosition;
         camera.transform.LookAt(target);
         #endregion
-        //Time.realtimeSinceStartup;
-
     }
+
     private void PlayerMovementV2()
     {
         var typeOfForce = ForceMode.Impulse;
