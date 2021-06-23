@@ -7,7 +7,7 @@ public class movement : MonoBehaviour
     public Rigidbody cube;
     public Camera camera;
     public Transform target;
-    public float moveSpeed = 50f;
+    public static float moveSpeed = 40f;
     public float jumpHeight = 2f;
     public bool IsOnGround;
     public int NumberJumps;
@@ -64,6 +64,7 @@ public class movement : MonoBehaviour
         camera.transform.position = SmoothPosition;
         camera.transform.LookAt(target);
         #endregion
+        //Time.realtimeSinceStartup;
 
     }
     private void PlayerMovementV2()
@@ -71,22 +72,25 @@ public class movement : MonoBehaviour
         var typeOfForce = ForceMode.Impulse;
         var forceAplied = moveSpeed * Time.deltaTime * cube.mass;
         if (Input.GetKey(KeyCode.A))
-            cube.AddForce(new Vector3(-forceAplied, 0f, 0f), typeOfForce);
+            cube.AddRelativeForce(new Vector3(-forceAplied, 0f, 0f), typeOfForce);
         if (Input.GetKey(KeyCode.W))
-            cube.AddForce(new Vector3(0f, 0f,forceAplied), typeOfForce);
-        if(Input.GetKey(KeyCode.D))
-            cube.AddForce(new Vector3(forceAplied, 0f, 0f), typeOfForce);
+            cube.AddRelativeForce(new Vector3(0f, 0f, forceAplied), typeOfForce);
+        //cube.AddRelativeForce(Vector3.forward*forceAplied);
+        if (Input.GetKey(KeyCode.D))
+            cube.AddRelativeForce(new Vector3(forceAplied, 0f, 0f), typeOfForce);
         if (Input.GetKey(KeyCode.S))
-            cube.AddForce(new Vector3(0f, 0f, -forceAplied), typeOfForce);
+            cube.AddRelativeForce(new Vector3(0f, 0f, -forceAplied), typeOfForce);
         if (Input.GetKey(KeyCode.Space) && IsOnGround)
         {
-            cube.AddForce(0, forceAplied*10, 0,typeOfForce);
+            cube.AddRelativeForce(0, forceAplied*10, 0,typeOfForce);
             IsOnGround = false;
         }
         if (Input.GetKey(KeyCode.E))
             cube.transform.Rotate(new Vector3(0f, moveSpeed * Time.deltaTime, 0f));
         if (Input.GetKey(KeyCode.Q))
             cube.transform.Rotate(new Vector3(0f, -moveSpeed * Time.deltaTime, 0f));
+        if (Input.GetKey(KeyCode.C))
+            cube.transform.eulerAngles = new Vector3();
     }
 
     private void PlayerMovement()
