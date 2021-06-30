@@ -5,15 +5,18 @@ using UnityEngine;
 public class movement : MonoBehaviour
 {
     #region Declarations
-    public Rigidbody cube;
-    public Camera camera;
-    public Transform target;
-    public static float moveSpeed = 40f;
+    public Rigidbody Player1;
+    public Rigidbody Player2;
+    public Camera camera1;
+    public Camera camera2;
+    public Transform target1;
+    public Transform target2;
+    public static float moveSpeed = 30f;
     public float jumpHeight = 2f;
     public bool IsOnGround;
     public int NumberJumps;
     public Vector3 offset;
-    public float cameraSpeed = 0.75f;
+    public float cameraSpeed = 0.8f;
     public bool HasCollided;
     #endregion
     // Start is called before the first frame update
@@ -39,72 +42,110 @@ public class movement : MonoBehaviour
         {
             if (Input.GetButtonDown("Jump"))
             {
-                cube.AddForce(Vector3.up * jumpHeight);
+                Player1.AddForce(Vector3.up * jumpHeight);
                 NumberJumps += 1;
             }
         }
         PlayerMovementV2();
-        #region CameraMovement
-        Vector3 DesieredPosition = target.position + offset;
-        Vector3 SmoothPosition = Vector3.Lerp(camera.transform.position, DesieredPosition, (cameraSpeed * Time.deltaTime));
-        camera.transform.position = SmoothPosition;
-        camera.transform.LookAt(target);
+
+        Player2Movement();
+    }
+    private void LateUpdate()
+    {
+        #region Camera Movement
+        Vector3 DesieredPosition = target1.position + offset;
+        Vector3 SmoothPosition = Vector3.Lerp(camera1.transform.position, DesieredPosition, (cameraSpeed * Time.deltaTime));
+        camera1.transform.position = SmoothPosition;
+        camera1.transform.LookAt(target1);
+        #endregion
+
+        #region Camera Movement
+        Vector3 DesieredPosition2 = target2.position + offset;
+        Vector3 SmoothPosition2 = Vector3.Lerp(camera2.transform.position, DesieredPosition2, (cameraSpeed * Time.deltaTime));
+        camera2.transform.position = SmoothPosition2;
+        camera2.transform.LookAt(target2);
         #endregion
     }
 
     private void PlayerMovementV2()
     {
         var typeOfForce = ForceMode.Impulse;
-        var forceAplied = moveSpeed * Time.deltaTime * cube.mass;
+        var forceAplied = moveSpeed * Time.deltaTime * Player1.mass;
         if (Input.GetKey(KeyCode.A))
-            cube.AddRelativeForce(new Vector3(-forceAplied, 0f, 0f), typeOfForce);
+            Player1.AddRelativeForce(new Vector3(-forceAplied, 0f, 0f), typeOfForce);
         if (Input.GetKey(KeyCode.W))
-            cube.AddRelativeForce(new Vector3(0f, 0f, forceAplied), typeOfForce);
+            Player1.AddRelativeForce(new Vector3(0f, 0f, forceAplied), typeOfForce);
         //cube.AddRelativeForce(Vector3.forward*forceAplied);
         if (Input.GetKey(KeyCode.D))
-            cube.AddRelativeForce(new Vector3(forceAplied, 0f, 0f), typeOfForce);
+            Player1.AddRelativeForce(new Vector3(forceAplied, 0f, 0f), typeOfForce);
         if (Input.GetKey(KeyCode.S))
-            cube.AddRelativeForce(new Vector3(0f, 0f, -forceAplied), typeOfForce);
+            Player1.AddRelativeForce(new Vector3(0f, 0f, -forceAplied), typeOfForce);
         if (Input.GetKey(KeyCode.Space) && IsOnGround)
         {
-            cube.AddRelativeForce(0, forceAplied*10, 0,typeOfForce);
+            Player1.AddRelativeForce(0, forceAplied*10, 0,typeOfForce);
             IsOnGround = false;
         }
         if (Input.GetKey(KeyCode.E))
-            cube.transform.Rotate(new Vector3(0f, moveSpeed * Time.deltaTime, 0f));
+            Player1.transform.Rotate(new Vector3(0f, moveSpeed * Time.deltaTime, 0f));
         if (Input.GetKey(KeyCode.Q))
-            cube.transform.Rotate(new Vector3(0f, -moveSpeed * Time.deltaTime, 0f));
+            Player1.transform.Rotate(new Vector3(0f, -moveSpeed * Time.deltaTime, 0f));
         if (Input.GetKey(KeyCode.C))
-            cube.transform.eulerAngles = new Vector3();
+            Player1.transform.eulerAngles = new Vector3();
     }
 
     private void PlayerMovement()
     {
         if (Input.GetKey(KeyCode.A))
-            cube.transform.position += Time.deltaTime * moveSpeed * -transform.right;
+            Player1.transform.position += Time.deltaTime * moveSpeed * -transform.right;
         if (Input.GetKey(KeyCode.D))
-            cube.transform.position += Time.deltaTime * moveSpeed * transform.right;
+            Player1.transform.position += Time.deltaTime * moveSpeed * transform.right;
         if (Input.GetKey(KeyCode.W))
-            cube.transform.position += Time.deltaTime * moveSpeed * transform.forward;
+            Player1.transform.position += Time.deltaTime * moveSpeed * transform.forward;
         if (Input.GetKey(KeyCode.S))
-            cube.transform.position += Time.deltaTime * moveSpeed * -transform.forward;
+            Player1.transform.position += Time.deltaTime * moveSpeed * -transform.forward;
         if (Input.GetKey(KeyCode.Space) && IsOnGround)
         {
-            cube.AddForce(0, 50f, 0, ForceMode.Impulse);
+            Player1.AddForce(0, 50f, 0, ForceMode.Impulse);
             IsOnGround = false;
         }
 
         if (Input.GetKey(KeyCode.E))
-            cube.transform.Rotate(new Vector3(0f, moveSpeed * Time.deltaTime, 0f));
+            Player1.transform.Rotate(new Vector3(0f, moveSpeed * Time.deltaTime, 0f));
         if (Input.GetKey(KeyCode.Q))
-            cube.transform.Rotate(new Vector3(0f, -moveSpeed * Time.deltaTime, 0f));
-        var initialRotation = cube.rotation;
+            Player1.transform.Rotate(new Vector3(0f, -moveSpeed * Time.deltaTime, 0f));
+        var initialRotation = Player1.rotation;
         if (Input.GetKey(KeyCode.R))
         {
-            cube.transform.Rotate(new Vector3(0f, 0f, moveSpeed * Time.deltaTime));
-            var finalRotation = cube.rotation;
+            Player1.transform.Rotate(new Vector3(0f, 0f, moveSpeed * Time.deltaTime));
+            var finalRotation = Player1.rotation;
             var diferenceRotation = finalRotation.eulerAngles.z - initialRotation.eulerAngles.z;
-            camera.transform.Rotate(new Vector3(0f, 0f, diferenceRotation));
+            camera1.transform.Rotate(new Vector3(0f, 0f, diferenceRotation));
         }
+    }
+
+    private void Player2Movement()
+    {
+        var typeOfForce = ForceMode.Impulse;
+        var forceAplied = moveSpeed * Time.deltaTime * Player2.mass;
+        if (Input.GetKey(KeyCode.Keypad4))
+            Player2.AddRelativeForce(new Vector3(-forceAplied, 0f, 0f), typeOfForce);
+        if (Input.GetKey(KeyCode.Keypad8))
+            Player2.AddRelativeForce(new Vector3(0f, 0f, forceAplied), typeOfForce);
+        //cube.AddRelativeForce(Vector3.forward*forceAplied);
+        if (Input.GetKey(KeyCode.Keypad6))
+            Player2.AddRelativeForce(new Vector3(forceAplied, 0f, 0f), typeOfForce);
+        if (Input.GetKey(KeyCode.Keypad5))
+            Player2.AddRelativeForce(new Vector3(0f, 0f, -forceAplied), typeOfForce);
+        if (Input.GetKey(KeyCode.Keypad0) && IsOnGround)
+        {
+            Player2.AddRelativeForce(0, forceAplied * 10, 0, typeOfForce);
+            IsOnGround = false;
+        }
+        if (Input.GetKey(KeyCode.Keypad7))
+            Player2.transform.Rotate(new Vector3(0f, moveSpeed * Time.deltaTime, 0f));
+        if (Input.GetKey(KeyCode.Keypad9))
+            Player2.transform.Rotate(new Vector3(0f, -moveSpeed * Time.deltaTime, 0f));
+        if (Input.GetKey(KeyCode.Keypad2))
+            Player2.transform.eulerAngles = new Vector3();
     }
 }

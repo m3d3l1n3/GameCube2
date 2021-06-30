@@ -11,31 +11,32 @@ public class Score : MonoBehaviour
 {
     #region Declarations
     public Rigidbody Ball;
-    public GameObject Cube;
-    public int Points1;
-    public int Points2;
-    public Text ScoreText;
-    public Text ScoreText2;
+    public GameObject Player1;
+    public GameObject Player2;
+    public int PointsGate1;
+    public int PointsGate2;
+    public Text ScoreTextGate1;
+    public Text ScoreTextGate2;
     public Time timeFromScore;
     public Text GoalScored;
-    public Text Timer;
-    float timer = 1000f;
-    public Timer Tseconds;
+    public Text TextTimer;
+    float IntTimer = 1000f;
+    public Timer Timer;
     float CountDownSpeed = 1.5f;
     public GameObject supplyPrefab;
-    private static bool spawnSupply = false;
+    private static bool SupplyHasntSpawn = false;
     int supplyNumber = 0;
     #endregion
     // Start is called before the first frame update
     void Start()
     {
         GoalScored.text = "";
-        Points1 = 0;
-        Points2 = 0;
-        Tseconds = new Timer(2000);
-        Tseconds.AutoReset = false;
-        Tseconds.Elapsed += Tseconds_Elapsed;
-        Tseconds.Start();
+        PointsGate1 = 0;
+        PointsGate2 = 0;
+        Timer = new Timer(2000);
+        Timer.AutoReset = false;
+        Timer.Elapsed += Tseconds_Elapsed;
+        Timer.Start();
         SpawnSupply();
         SpawnSupply();
         SpawnSupply();
@@ -44,7 +45,7 @@ public class Score : MonoBehaviour
     private void Tseconds_Elapsed(object sender, ElapsedEventArgs e)
     {
         //Debug.Log("Timer elapsed");
-        spawnSupply = true;
+        SupplyHasntSpawn = true;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -57,23 +58,25 @@ public class Score : MonoBehaviour
 
     private void Goal()
     {
-        Points1 = Points1 + 1;
+        PointsGate1 = PointsGate1 + 1;
         GoalScored.text = "Blue team scored a goal";
         GoalScored.color = Color.blue;
-        ScoreText.text = $"Blue team: {Points1} goals";
-        ScoreText.color = Color.blue;
-        timer = 5f;
-        Cube.SetActive(false);
+        ScoreTextGate1.text = $"Blue team: {PointsGate1} goals";
+        ScoreTextGate1.color = Color.blue;
+        IntTimer = 5f;
+        Player1.SetActive(false);
+        Player2.SetActive(false);
     }
     private void Goal2()
     {
-        Points2 = Points2 + 1;
+        PointsGate2 = PointsGate2 + 1;
         GoalScored.text = "Red team scored a goal";
         GoalScored.color = Color.red;
-        ScoreText2.text = $"Red team: {Points2} goals";
-        ScoreText2.color = Color.red;
-        timer = 5f;
-        Cube.SetActive(false);
+        ScoreTextGate2.text = $"Red team: {PointsGate2} goals";
+        ScoreTextGate2.color = Color.red;
+        IntTimer = 5f;
+        Player2.SetActive(false);
+        Player1.SetActive(false);
     }
     
     // Update is called once per frame
@@ -83,23 +86,23 @@ public class Score : MonoBehaviour
         bool DoWENeedCountDown;
         if(Time.realtimeSinceStartup/CountDownSpeed<=4.5)
             CountDown(-Time.realtimeSinceStartup / CountDownSpeed + 4);
-        if (timer > 3) DoWENeedCountDown = false;
+        if (IntTimer > 3) DoWENeedCountDown = false;
         else DoWENeedCountDown = true;
         switch (DoWENeedCountDown && !string.IsNullOrEmpty(GoalScored.text))
         {
             case false:
-                CountDown(timer);
-                timer -= Time.deltaTime;
+                CountDown(IntTimer);
+                IntTimer -= Time.deltaTime;
                 break;
             case true:
-                Tseconds.Start();
+                Timer.Start();
                 Respawn();
                 break;
         }
-        if (spawnSupply)
+        if (SupplyHasntSpawn)
         {
             SpawnSupply();
-            spawnSupply = false;
+            SupplyHasntSpawn = false;
         }
         #endregion
     }
@@ -108,22 +111,23 @@ public class Score : MonoBehaviour
     {
         timer = Mathf.CeilToInt(timer);
         if (timer <= 3&& timer >= 0)
-            //contor = Time.time;
-            Timer.text = $"{timer:0}";
+            TextTimer.text = $"{timer:0}";
         if (timer <= 0)
         {
-            Timer.text = "";
-            //SpawnSupply();
+            TextTimer.text = "";
         }
     }//si pt dipa gol 
 
     private void Respawn()
     {
         GoalScored.text = "";
-        Cube.SetActive(true);
-        Cube.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        Player1.SetActive(true);
+        Player2.SetActive(true);
+        Player1.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        Player2.GetComponent<Rigidbody>().velocity = Vector3.zero;
         Ball.transform.position = new Vector3(486f, 2f, 385f);
-        Cube.transform.position = new Vector3(486f, 2f, 380f);
+        Player1.transform.position = new Vector3(486f, 2f, 380f);
+        Player2.transform.position = new Vector3(481f, 2f, 375f);
     }
     private void SpawnSupply()
     {

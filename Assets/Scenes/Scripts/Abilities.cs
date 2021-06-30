@@ -5,7 +5,7 @@ using UnityEngine;
 public class Abilities : MonoBehaviour
 {
     #region Declarations
-    public Rigidbody cube;
+    public Rigidbody Player;
     public System.Diagnostics.Stopwatch coolDown1;
     public System.Diagnostics.Stopwatch abilityDuration1;
     public System.Diagnostics.Stopwatch coolDown2;
@@ -33,7 +33,7 @@ public class Abilities : MonoBehaviour
     {
         abilityDuration2.Reset();
         abilityDuration2.Start();
-        cube.mass *= MassSpeedProportion;
+        Player.mass *= MassSpeedProportion;
         movement.moveSpeed *= MassSpeedProportion;
     }
     //Update is called once per frame
@@ -62,7 +62,7 @@ public class Abilities : MonoBehaviour
             abilityDuration2.Stop();
             coolDown2.Reset();
             coolDown2.Start();
-            cube.mass /= MassSpeedProportion;
+            Player.mass /= MassSpeedProportion;
             movement.moveSpeed /= MassSpeedProportion;
         }
 
