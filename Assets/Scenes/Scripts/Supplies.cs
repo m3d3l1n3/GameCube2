@@ -32,7 +32,7 @@ public class Supplies : MonoBehaviour
         if (collision.gameObject.name == "Ball")
         {
             Debug.Log("Collision");
-            Ball.AddForce(0f, 50f, 0f);
+            Ball.AddForce(0f, 5f, 0f);
         }
         if (collision.gameObject.tag == "Supply")
         {

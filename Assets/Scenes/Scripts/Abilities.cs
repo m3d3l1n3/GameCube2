@@ -52,7 +52,7 @@ public class Abilities : MonoBehaviour
             coolDown1.Stop();
 
         if (abilityDuration1.IsRunning == false && coolDown1.IsRunning == false)
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F)||Input.GetKeyDown(KeyCode.Keypad1))
                 AbilityCall1();
         #endregion
 
@@ -70,7 +70,7 @@ public class Abilities : MonoBehaviour
             coolDown2.Stop();
 
         if (abilityDuration2.IsRunning == false && coolDown2.IsRunning == false)
-            if (Input.GetKeyDown(KeyCode.G))
+            if (Input.GetKeyDown(KeyCode.G)||Input.GetKeyDown(KeyCode.Keypad3))
                 AbilityCall2();
         #endregion
     }
