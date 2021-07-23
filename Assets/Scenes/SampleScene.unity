@@ -561,7 +561,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -77.2}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &243759734
@@ -596,7 +596,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: Run Time
 --- !u!222 &243759735
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1084,9 +1084,6 @@ MonoBehaviour:
   camera2: {fileID: 673600246}
   target1: {fileID: 700844517}
   target2: {fileID: 1389283396}
-  jumpHeight: 2
-  IsOnGround: 0
-  NumberJumps: 0
   offset: {x: 2, y: 3, z: -5}
   cameraSpeed: 0.5
   HasCollided: 0
@@ -1402,6 +1399,49 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &913195175
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 913195177}
+  - component: {fileID: 913195176}
+  m_Layer: 0
+  m_Name: End
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &913195176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913195175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82afa0cb9e15e5647aedf756e5a786e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &913195177
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913195175}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 485.98004, y: 0.5023141, z: 391}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -1890,7 +1930,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1389283390}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c2415e0902e39fc4e97f4ed1e9f2e421, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2084,8 +2124,6 @@ MonoBehaviour:
   Ball: {fileID: 1430862498}
   Player1: {fileID: 700844513}
   Player2: {fileID: 1389283390}
-  PointsGate1: 0
-  PointsGate2: 0
   ScoreTextGate1: {fileID: 1537416263}
   ScoreTextGate2: {fileID: 1221903016}
   GoalScored: {fileID: 1683721307}

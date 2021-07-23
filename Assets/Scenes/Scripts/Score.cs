@@ -13,8 +13,8 @@ public class Score : MonoBehaviour
     public Rigidbody Ball;
     public GameObject Player1;
     public GameObject Player2;
-    public int PointsGate1;
-    public int PointsGate2;
+    public static int PointsGate1;
+    public static int PointsGate2;
     public Text ScoreTextGate1;
     public Text ScoreTextGate2;
     public Time timeFromScore;
@@ -51,9 +51,15 @@ public class Score : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.name == "Plane")
+        {
             Goal();
+            FindObjectOfType<EndGame>().Ending();
+        }
         if (collision.collider.name == "Plane2")
+        {
             Goal2();
+            FindObjectOfType<EndGame>().Ending();
+        }
     }
 
     private void Goal()

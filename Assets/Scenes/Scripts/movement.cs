@@ -12,9 +12,6 @@ public class movement : MonoBehaviour
     public Transform target1;
     public Transform target2;
     public static float moveSpeed = 30f;
-    public float jumpHeight = 2f;
-    public bool IsOnGround;
-    public int NumberJumps;
     public Vector3 offset;
     public float cameraSpeed = 0.8f;
     public bool HasCollided;
@@ -22,33 +19,16 @@ public class movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameState.HasGameEnded = false;
         Debug.Log("Hello");
     }
     // Update is called once per frame
-    void OnCollisionEnter(Collision other)
-    {
-        IsOnGround = true;
-        NumberJumps = 0;
-    }
 
     void FixedUpdate()
     {
-        if (NumberJumps > 1)
-        {
-            IsOnGround = false;
-        }
+        PlayerMovementV2(Player1);
 
-        if (IsOnGround)
-        {
-            if (Input.GetButtonDown("Jump"))
-            {
-                Player1.AddForce(Vector3.up * jumpHeight);
-                NumberJumps += 1;
-            }
-        }
-        PlayerMovementV2();
-
-        Player2Movement();
+        Player2Movement(Player2);
         #region Camera Movement
         Vector3 DesieredPosition = target1.position + offset;
         Vector3 SmoothPosition = Vector3.Lerp(camera1.transform.position, DesieredPosition, (cameraSpeed * Time.deltaTime));
@@ -64,7 +44,7 @@ public class movement : MonoBehaviour
         #endregion
     }
 
-    private void PlayerMovementV2()
+    private static void PlayerMovementV2(Rigidbody Player1)
     {
         var typeOfForce = ForceMode.Impulse;
         var forceAplied = moveSpeed * Time.deltaTime * Player1.mass;
@@ -77,10 +57,9 @@ public class movement : MonoBehaviour
             Player1.AddRelativeForce(new Vector3(forceAplied, 0f, 0f), typeOfForce);
         if (Input.GetKey(KeyCode.S))
             Player1.AddRelativeForce(new Vector3(0f, 0f, -forceAplied), typeOfForce);
-        if (Input.GetKey(KeyCode.Space) && IsOnGround)
+        if (Input.GetKey(KeyCode.Space) && Player1.position.y <= 1.2)
         {
-            Player1.AddRelativeForce(0, forceAplied*10, 0,typeOfForce);
-            IsOnGround = false;
+            Player1.AddRelativeForce(0, forceAplied, 0,typeOfForce);
         }
         if (Input.GetKey(KeyCode.E))
             Player1.transform.Rotate(new Vector3(0f, moveSpeed * Time.deltaTime, 0f));
@@ -90,37 +69,37 @@ public class movement : MonoBehaviour
             Player1.transform.eulerAngles = new Vector3();
     }
 
-    private void PlayerMovement()
-    {
-        if (Input.GetKey(KeyCode.A))
-            Player1.transform.position += Time.deltaTime * moveSpeed * -transform.right;
-        if (Input.GetKey(KeyCode.D))
-            Player1.transform.position += Time.deltaTime * moveSpeed * transform.right;
-        if (Input.GetKey(KeyCode.W))
-            Player1.transform.position += Time.deltaTime * moveSpeed * transform.forward;
-        if (Input.GetKey(KeyCode.S))
-            Player1.transform.position += Time.deltaTime * moveSpeed * -transform.forward;
-        if (Input.GetKey(KeyCode.Space) && IsOnGround)
-        {
-            Player1.AddForce(0, 50f, 0, ForceMode.Impulse);
-            IsOnGround = false;
-        }
+    //private void PlayerMovement()
+    //{
+    //    if (Input.GetKey(KeyCode.A))
+    //        Player1.transform.position += Time.deltaTime * moveSpeed * -transform.right;
+    //    if (Input.GetKey(KeyCode.D))
+    //        Player1.transform.position += Time.deltaTime * moveSpeed * transform.right;
+    //    if (Input.GetKey(KeyCode.W))
+    //        Player1.transform.position += Time.deltaTime * moveSpeed * transform.forward;
+    //    if (Input.GetKey(KeyCode.S))
+    //        Player1.transform.position += Time.deltaTime * moveSpeed * -transform.forward;
+    //    if (Input.GetKey(KeyCode.Space) && IsOnGround)
+    //    {
+    //        Player1.AddForce(0, 50f, 0, ForceMode.Impulse);
+    //        IsOnGround = false;
+    //    }
 
-        if (Input.GetKey(KeyCode.E))
-            Player1.transform.Rotate(new Vector3(0f, moveSpeed * Time.deltaTime, 0f));
-        if (Input.GetKey(KeyCode.Q))
-            Player1.transform.Rotate(new Vector3(0f, -moveSpeed * Time.deltaTime, 0f));
-        var initialRotation = Player1.rotation;
-        if (Input.GetKey(KeyCode.R))
-        {
-            Player1.transform.Rotate(new Vector3(0f, 0f, moveSpeed * Time.deltaTime));
-            var finalRotation = Player1.rotation;
-            var diferenceRotation = finalRotation.eulerAngles.z - initialRotation.eulerAngles.z;
-            camera1.transform.Rotate(new Vector3(0f, 0f, diferenceRotation));
-        }
-    }
+    //    if (Input.GetKey(KeyCode.E))
+    //        Player1.transform.Rotate(new Vector3(0f, moveSpeed * Time.deltaTime, 0f));
+    //    if (Input.GetKey(KeyCode.Q))
+    //        Player1.transform.Rotate(new Vector3(0f, -moveSpeed * Time.deltaTime, 0f));
+    //    var initialRotation = Player1.rotation;
+    //    if (Input.GetKey(KeyCode.R))
+    //    {
+    //        Player1.transform.Rotate(new Vector3(0f, 0f, moveSpeed * Time.deltaTime));
+    //        var finalRotation = Player1.rotation;
+    //        var diferenceRotation = finalRotation.eulerAngles.z - initialRotation.eulerAngles.z;
+    //        camera1.transform.Rotate(new Vector3(0f, 0f, diferenceRotation));
+    //    }
+    //}
 
-    private void Player2Movement()
+    private static void Player2Movement(Rigidbody Player2)
     {
         var typeOfForce = ForceMode.Impulse;
         var forceAplied = moveSpeed * Time.deltaTime * Player2.mass;
@@ -133,10 +112,9 @@ public class movement : MonoBehaviour
             Player2.AddRelativeForce(new Vector3(forceAplied, 0f, 0f), typeOfForce);
         if (Input.GetKey(KeyCode.Keypad5))
             Player2.AddRelativeForce(new Vector3(0f, 0f, -forceAplied), typeOfForce);
-        if (Input.GetKey(KeyCode.Keypad0) && IsOnGround)
+        if (Input.GetKey(KeyCode.Keypad0) &&  Player2.position.y <= 1.2)
         {
-            Player2.AddRelativeForce(0, forceAplied * 10, 0, typeOfForce);
-            IsOnGround = false;
+            Player2.AddRelativeForce(0, forceAplied, 0, typeOfForce);
         }
         if (Input.GetKey(KeyCode.Keypad7))
             Player2.transform.Rotate(new Vector3(0f, moveSpeed * Time.deltaTime, 0f));
