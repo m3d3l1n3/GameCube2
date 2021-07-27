@@ -30,6 +30,8 @@ public class Score : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ScoreTextGate1.text = "";
+        ScoreTextGate2.text = "";
         GoalScored.text = "";
         PointsGate1 = 0;
         PointsGate2 = 0;

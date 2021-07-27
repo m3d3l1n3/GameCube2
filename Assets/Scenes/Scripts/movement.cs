@@ -13,7 +13,7 @@ public class movement : MonoBehaviour
     public Transform target2;
     public static float moveSpeed = 30f;
     public Vector3 offset;
-    public float cameraSpeed = 0.8f;
+    public float cameraSpeed = 0.5f;
     public bool HasCollided;
     #endregion
     // Start is called before the first frame update
