@@ -16,14 +16,15 @@ public class movement : MonoBehaviour
     public float cameraSpeed = 0.5f;
     public bool HasCollided;
     #endregion
+
     // Start is called before the first frame update
     void Start()
     {
         GameState.HasGameEnded = false;
         Debug.Log("Hello");
     }
-    // Update is called once per frame
 
+    // Update is called once per frame
     void FixedUpdate()
     {
         PlayerMovementV2(Player1);

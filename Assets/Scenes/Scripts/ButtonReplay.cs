@@ -8,9 +8,10 @@ using UnityEngine.SceneManagement;
 
 public class ButtonReplay : MonoBehaviour
 {
-    public void PlayAgain(string text)
+    public void PlayAgain()
     {
         Debug.Log("Time to play again");
         SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
     }
+
 }
