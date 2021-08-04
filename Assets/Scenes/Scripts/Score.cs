@@ -92,8 +92,8 @@ public class Score : MonoBehaviour
     {
         #region Moving the timer && spawning supplies
         bool DoWENeedCountDown;
-        if(Time.realtimeSinceStartup/CountDownSpeed<=4.5)
-            CountDown(-Time.realtimeSinceStartup / CountDownSpeed + 4);
+        if(Time.timeSinceLevelLoad/CountDownSpeed<=4.5)
+            CountDown(-Time.timeSinceLevelLoad / CountDownSpeed + 4);
         if (IntTimer > 3) DoWENeedCountDown = false;
         else DoWENeedCountDown = true;
         switch (DoWENeedCountDown && !string.IsNullOrEmpty(GoalScored.text))
