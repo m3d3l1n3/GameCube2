@@ -8,9 +8,9 @@ public class ButtonStart : MonoBehaviour
 {
     public Slider slider;
     //for the slide to move accordingly to loading
-    public void StartGame()
+    public void StartGame(string SampleName)
     {
-        StartCoroutine(AsynchronousLoad("SampleScene"));
+        StartCoroutine(AsynchronousLoad(SampleName));
     }
     IEnumerator AsynchronousLoad(string scene)
     {
