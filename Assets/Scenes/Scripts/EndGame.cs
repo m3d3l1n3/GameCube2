@@ -9,7 +9,7 @@ public class EndGame : MonoBehaviour
 {
     // Start is called before the first frame update
     //public Text gaameOverScene;
-    int MaxScore = 1;
+    int MaxScore = 2;
    
     // Update is called once per frame
     public void Ending()
