@@ -1408,6 +1408,7 @@ GameObject:
   - component: {fileID: 851583348}
   - component: {fileID: 851583347}
   - component: {fileID: 851583349}
+  - component: {fileID: 851583350}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -1548,6 +1549,23 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &851583350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 851583342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df9b0c7358e10e34d8e59e63f864e678, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 851583344}
+  Target: {fileID: 851583345}
+  Camera: {fileID: 1080391567}
+  CameraOffset: {x: 0, y: 4, z: -10}
+  Option: 1
 --- !u!1 &913195175
 GameObject:
   m_ObjectHideFlags: 0
@@ -1705,7 +1723,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913195175}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48d4ffe58ad293b43b484d30cb49ba53, type: 3}
   m_Name: 
@@ -2670,6 +2688,7 @@ GameObject:
   - component: {fileID: 1577810843}
   - component: {fileID: 1577810844}
   - component: {fileID: 1577810845}
+  - component: {fileID: 1577810846}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -2789,6 +2808,23 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &1577810846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577810839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df9b0c7358e10e34d8e59e63f864e678, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 1577810841}
+  Target: {fileID: 1577810842}
+  Camera: {fileID: 673600246}
+  CameraOffset: {x: 0, y: 4, z: -10}
+  Option: 2
 --- !u!1 &1683721305
 GameObject:
   m_ObjectHideFlags: 0

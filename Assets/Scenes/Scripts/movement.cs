@@ -30,6 +30,7 @@ public class movement : MonoBehaviour
         PlayerMovementV2(Player1);
 
         Player2Movement(Player2);
+
         #region Camera Movement
         Vector3 DesieredPosition = target1.position + offset;
         Vector3 SmoothPosition = Vector3.Lerp(camera1.transform.position, DesieredPosition, (cameraSpeed * Time.deltaTime));
