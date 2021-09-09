@@ -1565,7 +1565,7 @@ MonoBehaviour:
   Target: {fileID: 851583345}
   Camera: {fileID: 1080391567}
   CameraOffset: {x: 0, y: 4, z: -10}
-  Option: 1
+  MovementControlOption: 1
 --- !u!1 &913195175
 GameObject:
   m_ObjectHideFlags: 0
@@ -2824,7 +2824,7 @@ MonoBehaviour:
   Target: {fileID: 1577810842}
   Camera: {fileID: 673600246}
   CameraOffset: {x: 0, y: 4, z: -10}
-  Option: 2
+  MovementControlOption: 2
 --- !u!1 &1683721305
 GameObject:
   m_ObjectHideFlags: 0

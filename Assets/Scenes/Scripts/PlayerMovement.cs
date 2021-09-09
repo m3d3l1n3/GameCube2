@@ -12,7 +12,29 @@ public class PlayerMovement : MonoBehaviour
     private float movementSpeed = 30f;
     private float cameraSpeed = 0.5f;
     private Dictionary<PlayerActions, KeyCode> actionMapping;
-    private void SetMapping(int option) {
+    public int MovementControlOption;
+    #endregion
+    // Start is called before the first frame update
+    void Start()
+    {
+        GameState.HasGameEnded = false;
+        SetMapping(MovementControlOption);
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        Movement();
+
+        #region Camera Movement
+        Vector3 DesieredPosition = Target.position + CameraOffset;
+        Vector3 SmoothPosition = Vector3.Lerp(Camera.transform.position, DesieredPosition, (cameraSpeed * Time.deltaTime));
+        Camera.transform.position = SmoothPosition;
+        Camera.transform.LookAt(Target);
+        #endregion
+    }
+    private void SetMapping(int option)
+    {
         if (option == 1)
         {
             actionMapping = new Dictionary<PlayerActions, KeyCode>()
@@ -41,27 +63,6 @@ public class PlayerMovement : MonoBehaviour
                 {PlayerActions.Reset, KeyCode.Keypad2}
             };
         }
-    }
-    public int Option;
-    #endregion
-    // Start is called before the first frame update
-    void Start()
-    {
-        GameState.HasGameEnded = false;
-        SetMapping(Option);
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        Movement();
-
-        #region Camera Movement
-        Vector3 DesieredPosition = Target.position + CameraOffset;
-        Vector3 SmoothPosition = Vector3.Lerp(Camera.transform.position, DesieredPosition, (cameraSpeed * Time.deltaTime));
-        Camera.transform.position = SmoothPosition;
-        Camera.transform.LookAt(Target);
-        #endregion
     }
     public enum PlayerActions
     {
