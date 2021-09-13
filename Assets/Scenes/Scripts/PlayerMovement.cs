@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     {
         GameState.HasGameEnded = false;
         SetMapping(MovementControlOption);
+        if (GameState.TypeOfPlayer == "Single player") Camera.rect = new Rect(0,0,1,1);
     }
 
     // Update is called once per frame

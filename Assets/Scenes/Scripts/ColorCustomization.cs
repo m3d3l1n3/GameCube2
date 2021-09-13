@@ -6,7 +6,6 @@ public class ColorCustomization : MonoBehaviour
 {
     public Color[] colors;
     public Material car;
-
     public void ChangeColors(int ColorIndex)
     {
         car.color = colors[ColorIndex];

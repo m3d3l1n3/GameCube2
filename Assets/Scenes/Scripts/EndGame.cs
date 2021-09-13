@@ -34,6 +34,7 @@ public class EndGame : MonoBehaviour
 
 public static class GameState
 {
+    public static string TypeOfPlayer = "Multiplayer";
     public static int ScoreTeam1;
     public static int ScoreTeam2;
     public static string Winner;
