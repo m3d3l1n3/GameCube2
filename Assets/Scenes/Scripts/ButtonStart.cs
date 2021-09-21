@@ -10,6 +10,7 @@ public class ButtonStart : MonoBehaviour
     //for the slide to move accordingly to loading
     public void StartGame(string SampleName)
     {
+        if (SampleName == "CustomizationScene" && GameState.TypeOfPlayer == "Single player") SampleName = "CustomizationSceneSinglePlayer";
         StartCoroutine(AsynchronousLoad(SampleName));
     }
     IEnumerator AsynchronousLoad(string scene)

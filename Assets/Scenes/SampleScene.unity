@@ -1625,7 +1625,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: fa1c41ca5fd9181428c61f9624794cb9, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2525,13 +2525,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ball: {fileID: 1430862498}
   Player1: {fileID: 851583342}
-  Player2: {fileID: 1389283390}
+  Player2: {fileID: 1577810839}
   ScoreTextGate1: {fileID: 1537416263}
   ScoreTextGate2: {fileID: 1221903016}
   GoalScored: {fileID: 1683721307}
   TextTimer: {fileID: 74215610}
   supplyPrefab: {fileID: 1000240782099819084, guid: 1e598b90a850c68418bc0459ffc3c3bf,
     type: 3}
+  CollisionSound: {fileID: 8300000, guid: ee91d9e8418da184d8ae6bf2b1c1d016, type: 3}
+  audioSource: {fileID: 913195178}
 --- !u!1 &1528021301
 GameObject:
   m_ObjectHideFlags: 0

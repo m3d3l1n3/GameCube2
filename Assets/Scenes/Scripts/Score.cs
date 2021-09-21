@@ -26,6 +26,8 @@ public class Score : MonoBehaviour
     public GameObject supplyPrefab;
     private static bool SupplyHasntSpawn = false;
     int supplyNumber = 0;
+    public AudioClip CollisionSound;
+    public AudioSource audioSource;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -62,6 +64,8 @@ public class Score : MonoBehaviour
             Goal2();
             FindObjectOfType<EndGame>().Ending();
         }
+        if (collision.collider.name == "Player1" || collision.collider.name == "Player2")
+            audioSource.PlayOneShot(CollisionSound, 1f);
     }
 
     private void Goal()
